@@ -23,15 +23,15 @@ st.set_page_config(
 # DEF FUNCTION
 def stars(q, skor):
     star = 0
-    if skor <= q.iloc[0]:
+    if skor < q.iloc[0]:
         star = 1
-    elif q.iloc[0] < skor <= q.iloc[1]:
+    elif q.iloc[0] <= skor < q.iloc[1]:
         star = 2
-    elif q.iloc[1] < skor <= q.iloc[2]:
+    elif q.iloc[1] <= skor < q.iloc[2]:
         star = 3
-    elif q.iloc[2] < skor <= q.iloc[3]:
+    elif q.iloc[2] <= skor < q.iloc[3]:
         star = 4
-    elif skor > q.iloc[3]:
+    elif skor >= q.iloc[3]:
         star = 5
 
     return star
