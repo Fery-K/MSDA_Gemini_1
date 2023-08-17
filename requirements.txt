@@ -1,5 +1,4 @@
 pandas
 streamlit
 altair
-plotly.express
-time
+plotly
