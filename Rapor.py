@@ -7,10 +7,10 @@ import time
 
 # IMPORT DATASETS
 url = 'https://github.com/Fery-K/MSDA_Gemini_1/raw/master/Datasets/Rekapitulasi_Gemini.xlsx'
-penilaian = pd.read_excel(url, sheet_name='Penilaian')
-kehadiran = pd.read_excel(url, sheet_name='Kehadiran')
-kontribusi = pd.read_excel(url, sheet_name='Kontribusi')
-auth = pd.read_excel(url, sheet_name='Authenticator')
+penilaian = pd.read_excel(url, engine='openpyxl', sheet_name='Penilaian')
+kehadiran = pd.read_excel(url, engine='openpyxl', sheet_name='Kehadiran')
+kontribusi = pd.read_excel(url, engine='openpyxl', sheet_name='Kontribusi')
+auth = pd.read_excel(url, engine='openpyxl', sheet_name='Authenticator')
 
 # PAGE CONFIG
 st.set_page_config(
