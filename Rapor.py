@@ -6,10 +6,11 @@ import plotly.express as px
 import time
 
 # IMPORT DATASETS
-penilaian = pd.read_excel(r'Datasets/Rekapitulasi Gemini.xlsx', sheet_name='Penilaian')
-kehadiran = pd.read_excel(r'Datasets/Rekapitulasi Gemini.xlsx', sheet_name='Kehadiran')
-kontribusi = pd.read_excel(r'Datasets/Rekapitulasi Gemini.xlsx', sheet_name='Kontribusi')
-auth = pd.read_excel(r'Datasets/Rekapitulasi Gemini.xlsx', sheet_name='Authenticator')
+url = 'https://raw.githubusercontent.com/Fery-K/MSDA_Gemini_1/raw/master/Datasets/Rekapitulasi%20Gemini.xlsx'
+penilaian = pd.read_excel(url, engine='openpyxl', sheet_name='Penilaian')
+kehadiran = pd.read_excel(url, engine='openpyxl', sheet_name='Kehadiran')
+kontribusi = pd.read_excel(url, engine='openpyxl', sheet_name='Kontribusi')
+auth = pd.read_excel(url, engine='openpyxl', sheet_name='Authenticator')
 
 # PAGE CONFIG
 st.set_page_config(
