@@ -178,8 +178,9 @@ def verified(name):
             {k_hadir}
             ''')
         with col8:
-            st.markdown('''
-            # ini isi apa yak gua juga bingung
+            k_all = auth[auth['Nama'] == name]['Komentar Total'].values[0]
+            st.markdown(f'''
+            {k_all}
             ''')
         st.header('')
         st.header('')
