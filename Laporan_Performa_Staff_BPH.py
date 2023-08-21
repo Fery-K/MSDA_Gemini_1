@@ -4,6 +4,7 @@ import streamlit as st
 import altair as alt
 import plotly.express as px
 import time
+import math
 
 # IMPORT DATASETS
 url = 'https://github.com/Fery-K/MSDA_Gemini_1/raw/master/Datasets/Rekapitulasi_Gemini.xlsx'
@@ -179,9 +180,11 @@ def verified(name):
             ''')
         with col8:
             k_all = auth[auth['Nama'] == name]['Komentar Total'].values[0]
-            st.markdown(f'''
-            {k_all}
-            ''')
+            if not math.isnan(k_all):
+                st.markdown(f'''
+                {k_all}
+                ''')
+
         st.header('')
         st.header('')
         col_a, col_b, col_c = st.columns([1, 2.5, 1])
