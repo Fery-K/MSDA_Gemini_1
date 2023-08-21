@@ -3,4 +3,3 @@ streamlit
 altair
 plotly
 openpyxl
-math
