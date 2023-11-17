@@ -6,15 +6,22 @@ import plotly.express as px
 import time
 
 # IMPORT DATASETS
-url = 'https://github.com/Fery-K/MSDA_Gemini_1/raw/master/Datasets/Rekapitulasi_Gemini_1.xlsx'
-penilaian = pd.read_excel(url, engine='openpyxl', sheet_name='Penilaian')
-kehadiran = pd.read_excel(url, engine='openpyxl', sheet_name='Kehadiran')
-kontribusi = pd.read_excel(url, engine='openpyxl', sheet_name='Kontribusi')
-auth = pd.read_excel(url, engine='openpyxl', sheet_name='Authenticator')
+url1 = 'https://github.com/Fery-K/MSDA_Gemini_1/raw/master/Datasets/Rekapitulasi_Gemini_1.xlsx'
+url2 = 'https://github.com/Fery-K/MSDA_Gemini_1/raw/master/Datasets/Rekapitulasi_Gemini_2.xlsx'
+
+penilaian1 = pd.read_excel(url1, engine='openpyxl', sheet_name='Penilaian')
+kehadiran1 = pd.read_excel(url1, engine='openpyxl', sheet_name='Kehadiran')
+kontribusi1 = pd.read_excel(url1, engine='openpyxl', sheet_name='Kontribusi')
+auth1 = pd.read_excel(url1, engine='openpyxl', sheet_name='Authenticator')
+
+penilaian2 = pd.read_excel(url2, engine='openpyxl', sheet_name='Penilaian')
+kehadiran2 = pd.read_excel(url2, engine='openpyxl', sheet_name='Kehadiran')
+kontribusi2 = pd.read_excel(url2, engine='openpyxl', sheet_name='Kontribusi')
+auth2 = pd.read_excel(url2, engine='openpyxl', sheet_name='Authenticator')
 
 # PAGE CONFIG
 st.set_page_config(
-    page_title='MSDA - Gemini #1',
+    page_title='MSDA - Gemini',
     page_icon='♊',
     layout='wide',
     initial_sidebar_state='expanded')
@@ -37,7 +44,7 @@ def stars(q, skor):
     return star
 
 
-def verified(name):
+def verified(name, auth, penilaian, kehadiran, kontribusi):
     div = auth[auth['Nama'] == name]['Staff Divisi'].values[0]
     st.header('Laporan Performa Staff BPH UBT Bersinar ✨')
     col1, col2, col3 = st.columns([1, 1, 0.75])
@@ -202,7 +209,7 @@ def verified(name):
             st.markdown('**Fery Kurniawan**')
 
 
-def unverified(name):
+def unverified(name, auth):
     div = auth[auth['Nama'] == name]['Staff Divisi'].values[0]
     st.header('Laporan Performa Staff BPH UBT Bersinar ✨')
     col1, col2, col3 = st.columns([1, 1, 0.1])
@@ -214,7 +221,7 @@ def unverified(name):
     col2.subheader('Hayoloo.. ID Line nya ngga sesuai !')
 
 
-def init(name):
+def init(name, auth):
     div = auth[auth['Nama'] == name]['Staff Divisi'].values[0]
     st.header('Laporan Performa Staff BPH UBT Bersinar ✨')
     col1, col2, col3 = st.columns([1, 1, 0.1])
@@ -228,7 +235,9 @@ def init(name):
 
 # BODY
 with st.sidebar:
-    iNama = st.selectbox('Pilih Nama Kalian', auth['Nama'].tolist())
+    rekap = st.selectbox('Periode Berapa Nih?', ['Gemini Periode #1', 'Gemini Periode #2'])
+
+    iNama = st.selectbox('Pilih Nama Kalian', auth2['Nama'].tolist())
     iPass = st.text_input('Masukkan ID Line kalian', '--ID Line--')
 
     with st.spinner('Tunggu Bentar...'):
@@ -239,11 +248,17 @@ with st.sidebar:
     st.caption('Jika mempunyai pertanyaan atau mengalami kendala, langsung contact staff MSDA yang ada di divisi kalian,'
                ' gas ngengg...')
 
-verif = auth[auth['Nama'] == iNama]['ID Line'].values[0]
+verif = auth2[auth2['Nama'] == iNama]['ID Line'].values[0]
 
 if iPass == verif:
-    verified(iNama)
+    if rekap == 'Gemini Periode #1':
+        verified(iNama, auth1, penilaian1, kehadiran1, kontribusi1)
+    else:
+        verified(iNama, auth2, penilaian2, kehadiran2, kontribusi2)
 elif iPass == '--ID Line--':
-    init(iNama)
+    init(iNama, auth2)
 else:
-    unverified(iNama)
+    if rekap == 'Gemini Periode #1':
+        unverified(iNama, auth1)
+    else:
+        unverified(iNama, auth2)
