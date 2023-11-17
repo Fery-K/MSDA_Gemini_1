@@ -6,7 +6,7 @@ import plotly.express as px
 import time
 
 # IMPORT DATASETS
-url = 'https://github.com/Fery-K/MSDA_Gemini_1/raw/master/Datasets/Rekapitulasi_Gemini.xlsx'
+url = 'https://github.com/Fery-K/MSDA_Gemini_1/raw/master/Datasets/Rekapitulasi_Gemini_1.xlsx'
 penilaian = pd.read_excel(url, engine='openpyxl', sheet_name='Penilaian')
 kehadiran = pd.read_excel(url, engine='openpyxl', sheet_name='Kehadiran')
 kontribusi = pd.read_excel(url, engine='openpyxl', sheet_name='Kontribusi')
