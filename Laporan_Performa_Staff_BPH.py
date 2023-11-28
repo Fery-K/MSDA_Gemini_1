@@ -157,6 +157,7 @@ def verified(name, auth, penilaian, kehadiran, kontribusi):
         skor_total = auth[auth['Nama'] == name]['Total'].values[0]
 
         q_nilai = penilaian['Skor Nilai'].quantile([.2, .4, .6, .8])
+        q_nilai.iloc[1] = q_nilai.iloc[1]-1
         q_hadir = kehadiran['Skor Kehadiran'].quantile([.2, .4, .6, .8])
         q_kontribusi = kontribusi['Skor Kontribusi'].quantile([.2, .4, .6, .8])
         q_total = auth['Total'].quantile([.2, .4, .6, .8])
