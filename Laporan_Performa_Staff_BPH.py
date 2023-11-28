@@ -75,9 +75,9 @@ def verified(name, auth, penilaian, kehadiran, kontribusi):
         with col_b:
             panit = kontribusi.columns.values[2:-1]
             nilai_panit = kontribusi[kontribusi['Nama'] == name].loc[:, panit].values[0]
-            n_ketupel, n_kabid, n_kadiv, n_staff, n_absen = 0, 0, 0, 0, 0
+            n_ketupel, n_kabid, n_kadiv, n_staff, n_cp, n_absen = 0, 0, 0, 0, 0, 0
             for n in nilai_panit:
-                if n == 4:
+                if n == 3:
                     n_ketupel += 1
                 elif n == 2.5:
                     n_kabid += 1
@@ -85,12 +85,14 @@ def verified(name, auth, penilaian, kehadiran, kontribusi):
                     n_kadiv += 1
                 elif n == 1:
                     n_staff += 1
+                elif n == 0.5:
+                    n_cp += 1
                 else:
                     n_absen += 1
 
-            df_panit = pd.DataFrame({'Jabatan': ['Ketua Pelaksana / Ring 0', 'Ketua Bidang / Ring 1',
-                                                 'Ketua Divisi / Ring 2', 'Staff', 'Absen'],
-                                     'Total': [n_ketupel, n_kabid, n_kadiv, n_staff, n_absen]})
+            df_panit = pd.DataFrame({'Jabatan': ['Ketua Pelaksana / Ring 0', 'Ring 1',
+                                                 'Ring 2 / Panit SyukWis Okt', 'CP OpRec MPAB', 'Staff', 'Absen'],
+                                     'Total': [n_ketupel, n_kabid, n_kadiv, n_staff, n_cp, n_absen]})
             plot_panit = alt.Chart(df_panit, title='Partisipasi Dalam Kepanitiaan UBT').mark_arc(innerRadius=50).encode(
                 alt.Theta('Total'),
                 alt.Color('Jabatan:O', title='Kontribusi', sort=['Absen', 'Staff', 'Ketua Divisi / Ring 2',
@@ -235,7 +237,7 @@ def init(name, auth):
 
 # BODY
 with st.sidebar:
-    rekap = st.selectbox('Periode Berapa Nih?', ['Gemini Periode #1', 'Gemini Periode #2'])
+    rekap = st.selectbox('', ['PERIODE #1', 'PERIODE #2'])
 
     iNama = st.selectbox('Pilih Nama Kalian', auth2['Nama'].tolist())
     iPass = st.text_input('Masukkan ID Line kalian', '--ID Line--')
