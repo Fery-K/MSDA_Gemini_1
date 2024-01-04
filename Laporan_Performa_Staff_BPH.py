@@ -254,14 +254,14 @@ with st.sidebar:
 verif = auth2[auth2['Nama'] == iNama]['ID Line'].values[0]
 
 if iPass == verif:
-    if rekap == 'Gemini Periode #1':
+    if rekap == 'PERIODE #1':
         verified(iNama, auth1, penilaian1, kehadiran1, kontribusi1)
     else:
         verified(iNama, auth2, penilaian2, kehadiran2, kontribusi2)
 elif iPass == '--ID Line--':
     init(iNama, auth2)
 else:
-    if rekap == 'Gemini Periode #1':
+    if rekap == 'PERIODE #1':
         unverified(iNama, auth1)
     else:
         unverified(iNama, auth2)
